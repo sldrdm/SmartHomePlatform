@@ -16,9 +16,16 @@ type Query {
 type Mutation {
   createDevice(input: CreateDeviceInput!): Device!
   removeDevice(id: Int!): Boolean!
+  updateDevice(input: UpdateDeviceInput!): Device!
 }
 
 input CreateDeviceInput {
   name: String!
   type: String!
+}
+
+input UpdateDeviceInput {
+  name: String
+  type: String
+  id: Int!
 }

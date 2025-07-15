@@ -4,7 +4,7 @@ import { Device } from './entities/device.entity';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/gql-auth.guard';
 import { CreateDeviceInput } from './dto/create-device.input'; // ✅ DTO içe aktarımı
-
+import { UpdateDeviceInput } from './dto/update-device.input'; // ekle
 @Resolver(() => Device)
 @UseGuards(GqlAuthGuard)
 export class DevicesResolver {
@@ -32,6 +32,13 @@ removeDevice(
   const user = context.req.user;
   return this.devicesService.remove(id, user.userId);
 }
-
+@Mutation(() => Device)
+updateDevice(
+  @Args('input') input: UpdateDeviceInput,
+  @Context() context,
+) {
+  const user = context.req.user;
+  return this.devicesService.update(input.id, input, user.userId);
+}
 
 }

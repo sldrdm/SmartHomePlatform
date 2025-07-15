@@ -38,6 +38,20 @@ export class DevicesService {
     this.devices = this.devices.filter((d) => d.id !== id);
     return true;
   }
+  update(id: number, updateData: Partial<Device>, userId: number): Device {
+  const deviceIndex = this.devices.findIndex(d => d.id === id && d.userId === userId);
+  if (deviceIndex === -1) {
+    throw new Error('Cihaz bulunamadı veya yetkiniz yok.');
+  }
+
+  this.devices[deviceIndex] = {
+    ...this.devices[deviceIndex],
+    ...updateData,
+  };
+
+  return this.devices[deviceIndex];
+}
+
 }
 
 
