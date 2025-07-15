@@ -20,7 +20,7 @@ export class DevicesController {
   @Delete(':id')
   delete(@Param('id') id: string, @Req() req: Request) {
     const user = req.user as any;
-    const success = this.devicesService.delete(+id, user.userId);
+    const success = this.devicesService.remove(+id, user.userId);
     return { success };
   }
   @Post()

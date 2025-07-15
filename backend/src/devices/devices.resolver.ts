@@ -24,4 +24,14 @@ export class DevicesResolver {
     const user = context.req.user;
     return this.devicesService.create(input.name, input.type, user.userId);
   }
+@Mutation(() => Boolean)
+removeDevice(
+  @Args('id', { type: () => Int }) id: number,
+  @Context() context,
+) {
+  const user = context.req.user;
+  return this.devicesService.remove(id, user.userId);
+}
+
+
 }

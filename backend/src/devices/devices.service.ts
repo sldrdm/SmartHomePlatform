@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { Device } from './entities/device.entity';
 
+import { Device } from './entities/device.entity';
+import { NotFoundException, ForbiddenException, Injectable } from '@nestjs/common';
 @Injectable()
 export class DevicesService {
   private devices: Device[] = [];
@@ -24,12 +24,20 @@ export class DevicesService {
     return this.devices;
   }
 
-  delete(id: number, userId: number): boolean {
-    const index = this.devices.findIndex((d) => d.id === id && d.userId === userId);
-    if (index !== -1) {
-      this.devices.splice(index, 1);
-      return true;
+    remove(id: number, userId: number): boolean {
+    const device = this.devices.find((d) => d.id === id);
+
+    if (!device) {
+      throw new NotFoundException('Cihaz bulunamadı');
     }
-    return false;
+
+    if (device.userId !== userId) {
+      throw new ForbiddenException('Bu cihazı silme yetkiniz yok');
+    }
+
+    this.devices = this.devices.filter((d) => d.id !== id);
+    return true;
   }
 }
+
+

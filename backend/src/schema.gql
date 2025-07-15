@@ -15,6 +15,7 @@ type Query {
 
 type Mutation {
   createDevice(input: CreateDeviceInput!): Device!
+  removeDevice(id: Int!): Boolean!
 }
 
 input CreateDeviceInput {
