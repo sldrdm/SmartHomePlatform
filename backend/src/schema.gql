@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Device {
+  id: Int!
+  name: String!
+  type: String!
+  userId: Int!
+}
+
+type Query {
+  devices: [Device!]!
+}
+
+type Mutation {
+  createDevice(input: CreateDeviceInput!): Device!
+}
+
+input CreateDeviceInput {
+  name: String!
+  type: String!
+}
