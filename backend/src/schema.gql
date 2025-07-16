@@ -9,14 +9,29 @@ type Device {
   userId: Int!
 }
 
+type Automation {
+  id: Int!
+  name: String!
+  triggerType: String!
+  triggerValue: String!
+  action: String!
+  deviceId: Int!
+  userId: Int!
+}
+
 type Query {
   devices: [Device!]!
+  findAllAutomation: [Automation!]!
+  findOneAutomation(id: Int!): Automation!
 }
 
 type Mutation {
   createDevice(input: CreateDeviceInput!): Device!
   removeDevice(id: Int!): Boolean!
   updateDevice(input: UpdateDeviceInput!): Device!
+  createAutomation(input: CreateAutomationInput!): Automation!
+  updateAutomation(id: Int!, input: UpdateAutomationInput!): Automation!
+  removeAutomation(id: Int!): Boolean!
 }
 
 input CreateDeviceInput {
@@ -27,5 +42,24 @@ input CreateDeviceInput {
 input UpdateDeviceInput {
   name: String
   type: String
+  id: Int!
+}
+
+input CreateAutomationInput {
+  name: String!
+  triggerType: String!
+  triggerValue: String!
+  action: String!
+  deviceId: Int!
+  userId: Int!
+}
+
+input UpdateAutomationInput {
+  name: String
+  triggerType: String
+  triggerValue: String
+  action: String
+  deviceId: Int
+  userId: Int
   id: Int!
 }
