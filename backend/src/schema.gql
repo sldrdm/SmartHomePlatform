@@ -33,12 +33,25 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
+type Sensor {
+  id: Int!
+  type: String!
+  value: Float!
+  unit: String!
+  location: String!
+  userId: Int!
+  deviceId: Int!
+  timestamp: DateTime!
+}
+
 type Query {
   devices: [Device!]!
   findAllAutomation: [Automation!]!
   findOneAutomation(id: Int!): Automation!
   findAllNotifications: [Notification!]!
   findNotification(id: Float!): Notification!
+  findAllSensors: [Sensor!]!
+  findSensor(id: Int!): Sensor!
 }
 
 type Mutation {
@@ -51,6 +64,9 @@ type Mutation {
   createNotification(input: CreateNotificationInput!): Notification!
   updateNotification(input: UpdateNotificationInput!): Notification!
   removeNotification(id: Float!): Boolean!
+  createSensor(input: CreateSensorInput!): Sensor!
+  updateSensor(input: UpdateSensorInput!): Sensor!
+  removeSensor(id: Int!): Boolean!
 }
 
 input CreateDeviceInput {
@@ -95,5 +111,24 @@ input UpdateNotificationInput {
   type: String
   isRead: Boolean
   userId: Float
+  id: Int!
+}
+
+input CreateSensorInput {
+  type: String!
+  value: Float!
+  unit: String!
+  location: String!
+  deviceId: Int!
+  userId: Int!
+}
+
+input UpdateSensorInput {
+  type: String
+  value: Float
+  unit: String
+  location: String
+  deviceId: Int
+  userId: Int
   id: Int!
 }
