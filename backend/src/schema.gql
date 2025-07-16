@@ -19,10 +19,26 @@ type Automation {
   userId: Int!
 }
 
+type Notification {
+  id: Int!
+  message: String!
+  type: String!
+  isRead: Boolean!
+  userId: Float!
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type Query {
   devices: [Device!]!
   findAllAutomation: [Automation!]!
   findOneAutomation(id: Int!): Automation!
+  findAllNotifications: [Notification!]!
+  findNotification(id: Float!): Notification!
 }
 
 type Mutation {
@@ -32,6 +48,9 @@ type Mutation {
   createAutomation(input: CreateAutomationInput!): Automation!
   updateAutomation(id: Int!, input: UpdateAutomationInput!): Automation!
   removeAutomation(id: Int!): Boolean!
+  createNotification(input: CreateNotificationInput!): Notification!
+  updateNotification(input: UpdateNotificationInput!): Notification!
+  removeNotification(id: Float!): Boolean!
 }
 
 input CreateDeviceInput {
@@ -61,5 +80,20 @@ input UpdateAutomationInput {
   action: String
   deviceId: Int
   userId: Int
+  id: Int!
+}
+
+input CreateNotificationInput {
+  message: String!
+  type: String!
+  isRead: Boolean!
+  userId: Float!
+}
+
+input UpdateNotificationInput {
+  message: String
+  type: String
+  isRead: Boolean
+  userId: Float
   id: Int!
 }

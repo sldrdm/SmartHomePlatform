@@ -9,7 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { DevicesModule } from './devices/devices.module';
 import { AutomationModule } from './automation/automation.module';
-
+import { NotificationModule } from './notification/notification.module';
 // Entity'ler (manuel eklemene gerek yok aslında, autoLoadEntities kullanınca)
 import { Automation } from './automation/entities/automation.entity';
 
@@ -40,6 +40,7 @@ import { Automation } from './automation/entities/automation.entity';
     UsersModule,
     DevicesModule,
     AutomationModule,
+    NotificationModule, 
   ],
 })
 export class AppModule {}
