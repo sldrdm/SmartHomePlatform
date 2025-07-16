@@ -11,6 +11,8 @@ import { DevicesModule } from './devices/devices.module';
 import { AutomationModule } from './automation/automation.module';
 import { NotificationModule } from './notification/notification.module';
 import { SensorModule } from './sensor/sensor.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { SchedulerModule } from './scheduler/scheduler.module';
 // Entity'ler (manuel eklemene gerek yok aslında, autoLoadEntities kullanınca)
 import { Automation } from './automation/entities/automation.entity';
 
@@ -28,7 +30,7 @@ import { Automation } from './automation/entities/automation.entity';
       synchronize: true, // sadece geliştirme aşamasında açık kalsın
       autoLoadEntities: true,
     }),
-
+ScheduleModule.forRoot(),
     // GraphQL konfigürasyonu
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -44,6 +46,7 @@ import { Automation } from './automation/entities/automation.entity';
     AutomationModule,
     NotificationModule,
     SensorModule,
+    SchedulerModule,
   ],
 })
 export class AppModule {}
